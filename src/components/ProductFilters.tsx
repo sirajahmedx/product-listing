@@ -70,7 +70,6 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
 
       {isOpen && (
         <div className="space-y-6 pb-6 border-b border-gray-100">
-          {/* Category */}
           <div>
             <h4 className="text-md font-medium text-gray-900 mb-3">Category</h4>
             <div className="space-y-2">
@@ -103,7 +102,6 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
             </div>
           </div>
 
-          {/* Rating */}
           <div>
             <h4 className="text-md font-medium text-gray-900 mb-3">Rating</h4>
             <div className="space-y-2">

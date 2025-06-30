@@ -106,7 +106,6 @@ export const ProductCatalog: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Hero Section */}
       <div className="text-center space-y-6 animate-fade-in pl-8">
         <div className="space-y-1.5">
           <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
@@ -149,9 +148,7 @@ export const ProductCatalog: React.FC = () => {
         ></div>
       </div>
 
-      {/* Filters + Products aligned perfectly side-by-side */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-        {/* Filters - starts at exact top of product cards */}
         <div className="lg:col-span-1">
           <ProductFilters
             filters={filters}
@@ -159,9 +156,7 @@ export const ProductCatalog: React.FC = () => {
           />
         </div>
 
-        {/* Products section */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Sort and View Controls */}
           <div className="flex justify-between items-center text-sm">
             <div className="space-x-4">
               <span className="text-gray-600 text-lg">Sort by:</span>
@@ -197,7 +192,6 @@ export const ProductCatalog: React.FC = () => {
               </button>
             </div>
 
-            {/* View Toggle */}
             <div className="flex space-x-2">
               <button
                 onClick={() => setViewMode("grid")}
@@ -218,7 +212,6 @@ export const ProductCatalog: React.FC = () => {
             </div>
           </div>
 
-          {/* Products */}
           {loading ? (
             <div className="flex justify-center py-12">
               <LoadingSpinner />
