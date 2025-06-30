@@ -27,7 +27,9 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/categories");
+      const response = await fetch(
+        "https://product-listing-backend-kohl.vercel.app/api/categories"
+      );
       const data = await response.json();
       setCategories(data);
     } catch (error) {
