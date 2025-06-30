@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Star, Minus, Plus } from 'lucide-react';
-import { LoadingSpinner } from './LoadingSpinner';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, Star, Minus, Plus } from "lucide-react";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 interface Product {
   id: number;
@@ -35,13 +35,13 @@ export const ProductDetail: React.FC = () => {
       setLoading(true);
       const response = await fetch(`http://localhost:3001/api/products/${id}`);
       if (!response.ok) {
-        throw new Error('Product not found');
+        throw new Error("Product not found");
       }
       const data = await response.json();
       setProduct(data);
       setError(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -52,16 +52,16 @@ export const ProductDetail: React.FC = () => {
       <Star
         key={index}
         className={`h-4 w-4 ${
-          index < Math.floor(rating) 
-            ? 'text-gray-900 fill-current' 
-            : 'text-gray-200'
+          index < Math.floor(rating)
+            ? "text-gray-900 fill-current"
+            : "text-gray-200"
         }`}
       />
     ));
   };
 
   const updateQuantity = (change: number) => {
-    setQuantity(prev => Math.max(1, Math.min(10, prev + change)));
+    setQuantity((prev) => Math.max(1, Math.min(10, prev + change)));
   };
 
   if (loading) {
@@ -72,7 +72,9 @@ export const ProductDetail: React.FC = () => {
     return (
       <div className="text-center py-12">
         <div className="max-w-md mx-auto">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Product not found</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            Product not found
+          </h3>
           <p className="text-gray-600 mb-4">{error}</p>
           <Link
             to="/"
@@ -86,75 +88,83 @@ export const ProductDetail: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Back link */}
-      <div className="mb-8">
+      <div className="mb-6">
         <Link
           to="/"
-          className="inline-flex items-center text-gray-600 hover:text-gray-900 text-sm"
+          className="inline-flex items-center text-md text-gray-500 hover:text-gray-800 transition"
         >
-          <ArrowLeft className="h-4 w-4 mr-1" />
+          <ArrowLeft className="h-[19px] w-[19px] mr-2" />
           Back
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Image */}
         <div>
           <img
             src={product.image}
             alt={product.name}
-            className="w-full aspect-square object-cover"
+            className="w-full aspect-square object-cover rounded-xl shadow-sm mt-4"
           />
         </div>
 
         {/* Product info */}
-        <div className="space-y-6">
+        <div className="space-y-5">
           <div>
-            <h1 className="text-2xl font-medium text-gray-900 mb-2">{product.name}</h1>
-            <p className="text-gray-600">{product.brand}</p>
+            <h1 className="text-2xl font-semibold text-gray-900">
+              {product.name}
+            </h1>
+            <p className="text-sm text-gray-500">{product.brand}</p>
           </div>
-          
-          <div className="flex items-center space-x-4">
+
+          <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-1">
               {renderStars(product.rating)}
             </div>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-500">
               {product.rating} ({product.reviews} reviews)
             </span>
           </div>
-          
-          <div className="text-xl font-medium text-gray-900">${product.price}</div>
-          
-          <p className="text-gray-600 leading-relaxed">{product.description}</p>
+
+          <div className="text-xl font-bold text-gray-900">
+            ${product.price}
+          </div>
+
+          <p className="text-sm text-gray-600 leading-relaxed">
+            {product.description}
+          </p>
 
           {product.features.length > 0 && (
             <div>
-              <h3 className="font-medium text-gray-900 mb-3">Features</h3>
-              <ul className="space-y-1 text-sm text-gray-600">
+              <h3 className="text-sm font-semibold text-gray-800 mb-2">
+                Key Features
+              </h3>
+              <ul className="text-sm text-gray-600 space-y-1 pl-4 list-disc">
                 {product.features.map((feature, index) => (
-                  <li key={index}>• {feature}</li>
+                  <li key={index}>{feature}</li>
                 ))}
               </ul>
             </div>
           )}
 
           {product.inStock ? (
-            <div className="space-y-4">
+            <div className="space-y-4 pt-2">
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-600">Quantity:</span>
-                <div className="flex items-center border border-gray-200">
+                <span className="text-sm text-gray-500">Quantity:</span>
+                <div className="flex items-center border rounded-md border-gray-200 overflow-hidden">
                   <button
                     onClick={() => updateQuantity(-1)}
-                    className="p-2 hover:bg-gray-50"
+                    className="px-3 py-2 text-gray-600 hover:bg-gray-50 disabled:opacity-30"
                     disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4" />
                   </button>
-                  <span className="px-4 py-2 text-sm">{quantity}</span>
+                  <span className="px-4 text-sm">{quantity}</span>
                   <button
                     onClick={() => updateQuantity(1)}
-                    className="p-2 hover:bg-gray-50"
+                    className="px-3 py-2 text-gray-600 hover:bg-gray-50 disabled:opacity-30"
                     disabled={quantity >= 10}
                   >
                     <Plus className="h-4 w-4" />
@@ -162,12 +172,12 @@ export const ProductDetail: React.FC = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-gray-900 text-white py-3 text-sm font-medium hover:bg-gray-800 transition-colors">
+              <button className="w-full bg-gray-900 text-white py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
                 Add to cart
               </button>
             </div>
           ) : (
-            <div className="text-gray-500 text-sm">Out of stock</div>
+            <div className="text-sm text-red-500">Out of stock</div>
           )}
         </div>
       </div>
