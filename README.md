@@ -1,5 +1,7 @@
 # Products Listing
 
+> ⭐ **If you liked this project (or anything else I've built), please leave a star!**
+
 Products Listing is a modern product catalog web application built with React, TypeScript, and Tailwind CSS. It provides a beautiful, responsive interface for browsing, searching, filtering, and sorting products. Users can view products in grid or list layouts, apply filters, and see detailed product information. The app fetches product data from a backend API and is easy to customize for different use cases.
 
 ## Features
